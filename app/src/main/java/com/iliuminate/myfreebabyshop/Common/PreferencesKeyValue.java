@@ -6,7 +6,7 @@ import com.iliuminate.myfreebabyshop.R;
 
 /**
  * Created by cdiaza on 04/10/2017.
- * Clase para acceder al preferences
+ * Clase para acceder al preferences del app
  */
 
 public class PreferencesKeyValue {
