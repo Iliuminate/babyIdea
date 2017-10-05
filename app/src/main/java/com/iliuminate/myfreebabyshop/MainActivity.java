@@ -1,5 +1,6 @@
 package com.iliuminate.myfreebabyshop;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,11 +14,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import com.iliuminate.myfreebabyshop.Activities.ItemListActivity;
+import com.iliuminate.myfreebabyshop.Common.AlertMessages;
+import com.iliuminate.myfreebabyshop.Intefaces.BaseActivity;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, BaseActivity {
+
+
+    //Declaracion de Variables
+    Button btnTest;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +52,14 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        initReferencesComponents();
+
+
+        addClickListeners();
     }
+
 
     @Override
     public void onBackPressed() {
@@ -55,12 +71,14 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -76,6 +94,7 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -103,5 +122,45 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+
+    //-----------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------
+
+    @Override
+    public void initReferencesComponents() {
+        //Instanciamos los diferentes componentes
+        btnTest = (Button)findViewById(R.id.btnTest);
+    }
+
+    @Override
+    public void addClickListeners() {
+        btnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callDialogMessages();
+            }
+        });
+
+        //Others...
+    }
+
+    @Override
+    public void implementMessages() {
+
+    }
+
+
+    //-----------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------
+
+    /**
+     * Muestra en pantalla un mensaje personalizado de prueba
+     */
+    private void callDialogMessages()
+    {
+        (AlertMessages.getInstance(MainActivity.this).onCreateDialog(Bundle.EMPTY)).show();
     }
 }
